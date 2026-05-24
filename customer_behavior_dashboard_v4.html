@@ -1,0 +1,220 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+.dash{background:#F0F0F4;border-radius:12px;overflow:hidden;}
+.hdr{background:#C03C7A;padding:16px 24px;text-align:center;}
+.hdr h1{color:#fff;font-size:20px;font-weight:700;letter-spacing:.3px;font-family:Arial,sans-serif;}
+.body{display:grid;grid-template-columns:158px 1fr;gap:11px;padding:11px;}
+.panel{background:#fff;border:1px solid #E0E0E0;border-radius:10px;padding:11px;display:flex;flex-direction:column;gap:13px;}
+.slbl{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-family:Arial,sans-serif;}
+.brow{display:flex;gap:5px;flex-wrap:wrap;}
+.bb{display:inline-block;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;font-family:Arial,sans-serif;background:#000;color:#fff;border:2px solid #000;transition:all .12s;}
+.bb:hover{background:#222;border-color:#222;}
+.bb.active{background:#333;color:#fff;border:2px solid #fff;outline:2px solid #333;}
+.slist{display:flex;flex-direction:column;gap:2px;}
+.si{padding:5px 8px;border-radius:5px;font-size:12px;cursor:pointer;color:#222;border:1px solid transparent;font-family:Arial,sans-serif;}
+.si.active{background:#F0DCE7;color:#7a1f46;font-weight:700;border-color:#e0b0c8;}
+.si:hover:not(.active){background:#faf5f8;}
+.rlist{display:flex;flex-direction:column;gap:4px;}
+.ri{display:flex;align-items:center;gap:7px;font-size:12px;color:#222;cursor:pointer;padding:3px 4px;border-radius:5px;font-family:Arial,sans-serif;}
+.ri:hover{background:#f5f5f5;}
+.ri input[type=radio]{accent-color:#C03C7A;width:13px;height:13px;cursor:pointer;flex-shrink:0;}
+.right{display:flex;flex-direction:column;gap:10px;}
+.krow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;}
+.kcard{background:#fff;border:1px solid #E8E8E8;border-radius:10px;padding:13px 10px;text-align:center;}
+.kv{font-size:25px;font-weight:700;color:#C03C7A;font-family:Arial,sans-serif;}
+.kl{font-size:11px;color:#999;margin-top:3px;font-family:Arial,sans-serif;}
+.cmid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;}
+.cbot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;}
+.cc{background:#fff;border:1px solid #E8E8E8;border-radius:10px;padding:11px;}
+.ct{font-size:11px;font-weight:700;color:#222;margin-bottom:7px;font-family:Arial,sans-serif;}
+.lg{display:flex;gap:10px;font-size:11px;color:#333;margin-bottom:5px;flex-wrap:wrap;font-family:Arial,sans-serif;}
+.ld{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:3px;vertical-align:middle;}
+</style>
+
+<div class="dash">
+  <div class="hdr"><h1>Customer Behavior Dashboard</h1></div>
+  <div class="body">
+
+    <div class="panel">
+      <div>
+        <div class="slbl">Subscription Status</div>
+        <div class="brow">
+          <span class="bb active" data-g="sub" data-v="All">All</span>
+          <span class="bb" data-g="sub" data-v="No">No</span>
+          <span class="bb" data-g="sub" data-v="Yes">Yes</span>
+        </div>
+      </div>
+      <div>
+        <div class="slbl">Gender</div>
+        <div class="brow">
+          <span class="bb active" data-g="gen" data-v="All">All</span>
+          <span class="bb" data-g="gen" data-v="Female">Female</span>
+          <span class="bb" data-g="gen" data-v="Male">Male</span>
+        </div>
+      </div>
+      <div>
+        <div class="slbl">Category</div>
+        <div class="slist" id="clist">
+          <div class="si active" data-c="All">All</div>
+          <div class="si" data-c="Accessories">Accessories</div>
+          <div class="si" data-c="Clothing">Clothing</div>
+          <div class="si" data-c="Footwear">Footwear</div>
+          <div class="si" data-c="Outerwear">Outerwear</div>
+        </div>
+      </div>
+      <div>
+        <div class="slbl">Shipping Type</div>
+        <div class="rlist">
+          <label class="ri"><input type="radio" name="sh" value="All" checked>All</label>
+          <label class="ri"><input type="radio" name="sh" value="2-Day Shipping">2-Day Shipping</label>
+          <label class="ri"><input type="radio" name="sh" value="Express">Express</label>
+          <label class="ri"><input type="radio" name="sh" value="Free Shipping">Free Shipping</label>
+          <label class="ri"><input type="radio" name="sh" value="Next Day Air">Next Day Air</label>
+          <label class="ri"><input type="radio" name="sh" value="Standard">Standard</label>
+          <label class="ri"><input type="radio" name="sh" value="Store Pickup">Store Pickup</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="krow">
+        <div class="kcard"><div class="kv" id="kc">3.9K</div><div class="kl">Number of Customers</div></div>
+        <div class="kcard"><div class="kv" id="kp">$59.76</div><div class="kl">Average Purchase Amount</div></div>
+        <div class="kcard"><div class="kv" id="kr">3.75</div><div class="kl">Average Review Rating</div></div>
+      </div>
+      <div class="cmid">
+        <div class="cc">
+          <div class="ct">% of customers by subscription status</div>
+          <div class="lg" id="dleg">
+            <span style="display:flex;align-items:center;gap:3px"><span class="ld" style="background:#1E2D5C"></span>No 73%</span>
+            <span style="display:flex;align-items:center;gap:3px"><span class="ld" style="background:#C03C7A"></span>Yes 27%</span>
+          </div>
+          <div style="position:relative;height:125px;"><canvas id="donut" role="img" aria-label="Donut chart subscription status: No 73%, Yes 27%">No 73%, Yes 27%</canvas></div>
+        </div>
+        <div class="cc">
+          <div class="ct">Revenue by category</div>
+          <div style="position:relative;height:148px;"><canvas id="rc" role="img" aria-label="Revenue by category">Clothing 104K, Accessories 74K, Footwear 36K, Outerwear 19K</canvas></div>
+        </div>
+        <div class="cc">
+          <div class="ct">Sales by category</div>
+          <div style="position:relative;height:148px;"><canvas id="sc" role="img" aria-label="Sales by category">Clothing 1737, Accessories 1240, Footwear 599, Outerwear 324</canvas></div>
+        </div>
+      </div>
+      <div class="cbot">
+        <div class="cc">
+          <div class="ct">Revenue by age group</div>
+          <div style="position:relative;height:170px;"><canvas id="ra" role="img" aria-label="Revenue by age group">Adult 90K, Middle-aged 67K, Senior 47K, Young Adult 29K</canvas></div>
+        </div>
+        <div class="cc">
+          <div class="ct">Sales by age group</div>
+          <div style="position:relative;height:170px;"><canvas id="sa" role="img" aria-label="Sales by age group">Adult 1510, Middle-aged 1116, Senior 788, Young Adult 486</canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const NV="#1E2D5C", PK="#C03C7A";
+const CATS=["Clothing","Accessories","Footwear","Outerwear"];
+const AGES=["Young Adult","Middle-aged","Adult","Senior"];
+const B={
+  subYes:1053,subNo:2847,
+  revCat:{Clothing:104264,Accessories:74200,Footwear:36093,Outerwear:18524},
+  salCat:{Clothing:1737,Accessories:1240,Footwear:599,Outerwear:324},
+  revAge:{"Young Adult":29258,"Middle-aged":67188,Adult:89741,Senior:46894},
+  salAge:{"Young Adult":486,"Middle-aged":1116,Adult:1510,Senior:788},
+  gSplit:{Male:2652,Female:1248},
+  shSplit:{"All":3900,"2-Day Shipping":668,Express:659,"Free Shipping":652,"Next Day Air":642,Standard:644,"Store Pickup":635},
+  subG:{Yes:{Male:716,Female:337},No:{Male:1936,Female:911}}
+};
+let F={sub:"All",gen:"All",cat:"All",sh:"All"};
+
+function ratio(){
+  const g=F.gen==="All"?1:B.gSplit[F.gen]/3900;
+  const s=F.sh==="All"?1:B.shSplit[F.sh]/3900;
+  const u=F.sub==="All"?1:F.sub==="Yes"?B.subYes/3900:B.subNo/3900;
+  return g*s*u;
+}
+
+function compute(){
+  const r=ratio();
+  const shF=F.sh==="All"?1:B.shSplit[F.sh]/3900;
+  let yes=F.gen==="All"?B.subYes:B.subG.Yes[F.gen];
+  let no=F.gen==="All"?B.subNo:B.subG.No[F.gen];
+  if(F.sub==="Yes") no=0; if(F.sub==="No") yes=0;
+  let revCat={},salCat={};
+  for(const c of CATS){
+    const k=F.cat==="All"||F.cat===c;
+    revCat[c]=k?Math.round(B.revCat[c]*r):0;
+    salCat[c]=k?Math.round(B.salCat[c]*r):0;
+  }
+  let revAge={},salAge={};
+  for(const a of AGES){ revAge[a]=Math.round(B.revAge[a]*r); salAge[a]=Math.round(B.salAge[a]*r); }
+  let cust=Math.round(3900*r);
+  if(F.cat!=="All") cust=salCat[F.cat];
+  return {cust,yes:Math.round(yes*shF),no:Math.round(no*shF),revCat,salCat,revAge,salAge};
+}
+
+const bOpts=(h)=>({
+  responsive:true,maintainAspectRatio:false,indexAxis:h?"y":"x",
+  plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>` ${d.raw.toLocaleString()}`}}},
+  scales:{
+    x:{grid:{color:h?"#f0f0f0":"transparent"},border:{display:false},ticks:{color:"#555",font:{size:10},callback:v=>v>=1000?(v/1000).toFixed(0)+"K":v}},
+    y:{grid:{color:h?"transparent":"#f0f0f0"},border:{display:false},ticks:{color:"#555",font:{size:10}}}
+  }
+});
+
+const donutC=new Chart(document.getElementById("donut"),{
+  type:"doughnut",
+  data:{labels:["No","Yes"],datasets:[{data:[2847,1053],backgroundColor:[NV,PK],borderWidth:2,borderColor:"#fff"}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:"62%",
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>{const t=d.dataset.data.reduce((a,b)=>a+b,0)||1;return ` ${d.label}: ${Math.round(d.raw/t*100)}%`;}}}}}
+});
+const rcC=new Chart(document.getElementById("rc"),{type:"bar",data:{labels:CATS,datasets:[{data:[104264,74200,36093,18524],backgroundColor:NV,borderRadius:3,borderSkipped:false}]},options:bOpts(false)});
+const scC=new Chart(document.getElementById("sc"),{type:"bar",data:{labels:CATS,datasets:[{data:[1737,1240,599,324],backgroundColor:NV,borderRadius:3,borderSkipped:false}]},options:bOpts(false)});
+const raC=new Chart(document.getElementById("ra"),{type:"bar",data:{labels:AGES,datasets:[{data:[29258,67188,89741,46894],backgroundColor:NV,borderRadius:3,borderSkipped:false}]},options:bOpts(true)});
+const saC=new Chart(document.getElementById("sa"),{type:"bar",data:{labels:AGES,datasets:[{data:[486,1116,1510,788],backgroundColor:NV,borderRadius:3,borderSkipped:false}]},options:bOpts(true)});
+
+function updLeg(y,n){
+  const t=y+n||1;
+  document.getElementById("dleg").innerHTML=
+    `<span style="display:flex;align-items:center;gap:3px"><span class="ld" style="background:${NV}"></span>No ${Math.round(n/t*100)}%</span>`+
+    `<span style="display:flex;align-items:center;gap:3px"><span class="ld" style="background:${PK}"></span>Yes ${Math.round(y/t*100)}%</span>`;
+}
+
+function refresh(){
+  const m=compute();
+  document.getElementById("kc").textContent=m.cust>=1000?(m.cust/1000).toFixed(1)+"K":m.cust;
+  document.getElementById("kp").textContent="$59.76";
+  document.getElementById("kr").textContent="3.75";
+  donutC.data.datasets[0].data=[m.no,m.yes]; donutC.update();
+  updLeg(m.yes,m.no);
+  rcC.data.datasets[0].data=CATS.map(c=>m.revCat[c]||0); rcC.update();
+  scC.data.datasets[0].data=CATS.map(c=>m.salCat[c]||0); scC.update();
+  raC.data.datasets[0].data=AGES.map(a=>m.revAge[a]||0); raC.update();
+  saC.data.datasets[0].data=AGES.map(a=>m.salAge[a]||0); saC.update();
+}
+
+document.querySelectorAll(".bb").forEach(b=>{
+  b.addEventListener("click",()=>{
+    const g=b.dataset.g;
+    document.querySelectorAll(`.bb[data-g="${g}"]`).forEach(x=>x.classList.remove("active"));
+    b.classList.add("active");
+    if(g==="sub") F.sub=b.dataset.v;
+    if(g==="gen") F.gen=b.dataset.v;
+    refresh();
+  });
+});
+document.querySelectorAll("#clist .si").forEach(i=>{
+  i.addEventListener("click",()=>{
+    document.querySelectorAll("#clist .si").forEach(x=>x.classList.remove("active"));
+    i.classList.add("active"); F.cat=i.dataset.c; refresh();
+  });
+});
+document.querySelectorAll("input[name=sh]").forEach(r=>{
+  r.addEventListener("change",()=>{ F.sh=r.value; refresh(); });
+});
+</script>
